@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calendar</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      text-align: center;
+      padding: 5px;
+	  display: inline-block;
+
+	  width: 90px;
+    }
+    th {
+      background-color: #ccc;
+    }
+	tn{
+		font-size: 60px;
+		display: inline-block;
+		float: left;
+		margin-top: 200px;
+	}
+	tm{
+		float: left;
+	}
+    td {
+      border: 1px solid white;
+    }
+    .highlight {
+      background-color: skyblue;
+    }
+	
+  </style>
+</head>
+<body>
+  <table id="calendar"></table>
+  <script>
+    // 获取当前日期	
+	
+    var today = new Date();
+    var currentMonth = today.getMonth();
+    var currentYear = today.getFullYear();
+
+    // 生成日历
+    function generateCalendar(month, year) {
+      var calendar = document.getElementById('calendar');
+      calendar.innerHTML = '';
+  
+      // 创建表头
+      var thead = document.createElement('thead');
+      var tm = document.createElement('tm');
+      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      var monthText = document.createElement('tn');
+      monthText.setAttribute('colspan', '7');
+      monthText.textContent = months[month] + ' ' + year;
+      tm.appendChild(monthText);
+      thead.appendChild(tm);
+      calendar.appendChild(thead);
+  
+      // 创建星期几标题行
+      var weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat','Sun'];
+      var tr = document.createElement('tr');
+      for (var i = 0; i < 7; i++) {
+        var th = document.createElement('th');
+        th.textContent = weekdays[i];
+        tr.appendChild(th);
+      }
+      thead.appendChild(tr);
+  
+      // 创建日期行
+      var tbody = document.createElement('tbody');
+      var date = new Date(year, month, 1);
+      var firstDay = date.getDay();
+      var daysInMonth = new Date(year, month+1, 0).getDate();
+      var dateIndex = 1;
+  
+       <!--控制日期行数-->
+      for (var i = 0; i < 5; i++) {
+        var tr = document.createElement('tr');
+        for (var j = 0; j < 7; j++) {
+          var td = document.createElement('td');
+          if (i === 0 && j < firstDay) {
+            td.textContent = '';
+          } else if (dateIndex <= daysInMonth) {
+            td.textContent = dateIndex;
+            if (dateIndex === today.getDate() && month === currentMonth && year === currentYear) {
+              td.classList.add('highlight');
+            }
+            dateIndex++;
+          }
+          tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+      }
+      calendar.appendChild(tbody);
+    }
+  
+    // 初始生成当前月份的日历
+    generateCalendar(currentMonth, currentYear);
+  </script>
+  
+</body>
+</html>
