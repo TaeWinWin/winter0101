@@ -5,20 +5,6 @@
 	<!--适应手机端界面-->
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <title>日历备忘录</title>
-
-	<script>
-    //得到手机屏幕的宽度
-    let htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
-    console.log('htmlWidth',htmlWidth)
-    //得到html的Dom元素
-    let htmlDom = document.getElementsByTagName('html')[0];
-    // if(htmlWidth>640){//超过640大小的，字体根部都是16px
-    //   htmlWidth=640;
-    //   console.log('htmlWidth-true',htmlWidth)
-    // }
-    //设置根元素字体大小
-    htmlDom.style.fontSize = htmlWidth / 40 + 'px';
-        </script>
 	
     <style type="text/css">
         table {
@@ -50,7 +36,7 @@
         caption {
 			display: inline-block;
 			float: left;
-			margin-top: 300px;
+			
         }
         .special {
             background-color: #AAA;
